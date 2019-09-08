@@ -17,39 +17,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);//R itu kelas yg isinya semua variabel yang ada di folder layout
-        //id bisa kembar yag penting beda layout
-        //1 xml bisa dipake buat banyak java, menu, dll. tapi 1 java cuma bisa pake 1 xml kecuali kalau mau gonta ganti
+        setContentView(R.layout.activity_main);
 
-        /*TextView textView = (TextView) findViewById(R.id.mainActivityTextView);
-        textView.setText(R.string.test_untuk_update_view);*/
+        TextView textView = (TextView) findViewById(R.id.mainActivityTextView);
+        textView.setText(R.string.test_untuk_update_view);
 
-        Button myBtn = (Button) findViewById(R.id.button1);
+        /*Button myBtn = (Button) findViewById(R.id.button1);
         myBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 EditText myEditText = (EditText)findViewById(R.id.editText1);
                 Log.d("ProteinTracker", myEditText.getText().toString());
             }
-
-        });
-
+        });*/
         Button helpBtn = (Button) findViewById(R.id.helpButton);
         helpBtn.setOnClickListener(helpButtonListener);
 
-        Button btnLayout = (Button) findViewById(R.id.btnLayout);
-
-        btnLayout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent i = new Intent(MainActivity.this,Main2Activity.class);
-                startActivity(i);
-            }
-        });
-
         if (savedInstanceState != null) {
-            Log.d("ProteinTracker", savedInstanceState.getString("abc"));//biar kalo dirotate layoutnya ga hancur
-            //mau naruh di Lognya Android Studio
+            Log.d("ProteinTracker", savedInstanceState.getString("abc"));
         }
     }
 
@@ -64,10 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener helpButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //intent untuk berpindah-pindah kelas
-            //ERROR-setText = null->mau ngeset view di objek tidak ada
-            Intent intent = new Intent(MainActivity.this, HelpActivity.class);//class -> tujuan mau kemana (kemananya), this -> kelas ini (darimananya)
-            Bundle b = new Bundle();//masukkan data di intent
+            Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+            Bundle b = new Bundle();
             EditText myEditText = (EditText) findViewById(R.id.editText1);
             b.putString("helpString", myEditText.getText().toString());
             intent.putExtras(b);
@@ -76,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {//state: untuk menyimpan nilai sementara
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
         outState.putString("abc", "test");
         super.onSaveInstanceState(outState);
     }
